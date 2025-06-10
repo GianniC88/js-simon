@@ -37,23 +37,52 @@ while (numbers.length < 5) {
     numbers.push(numb);
   }
 }
+
 console.log(numbers);
 numberList.innerHTML = numbers;
 
-let seconds = 5;
+//timer
+let seconds = 3;
 const limit = 0;
+
 const timer = setInterval(() => {
   countdownEl.innerText = seconds;
   seconds--;
   console.log(seconds);
   console.log(seconds === 0);
 
-  if (seconds < 0) {
+  if (seconds < limit) {
     // stop countdown
     clearInterval(timer);
     // togli la lista di numeri
     numberList.innerText = "";
-    // forma con answer form ( modulo di rispota)
+    // form answers (linea 32 html)
     answersFormEl.classList.remove("d-none");
   }
 }, 1000);
+
+const inputsEL = document.querySelectorAll("input");
+console.log(inputsEL);
+
+answersFormEl.addEventListener("submit", (e) => {
+  e.preventDefault();
+  console.log(inputsEL);
+
+  //array che salva i valori
+
+  const userGuesses = [];
+  for (let i = 0; i < inputsEL.length; i++) {
+    const userAnswer = Number(inputsEL[i].value);
+  }
+
+  //pubblica quello che c'è nel array
+
+  if (numbers.includes(userAnswer)) {
+    userGuesses.push(userAnswer);
+  }
+  //controllo dei numeri inseriti combaciano con quelli generati
+
+  console.log(userGuesses);
+  instructionsEL.innerText = "hai vinto";
+  answersFormEl.classList.add("d-none");
+});
