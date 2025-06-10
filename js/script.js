@@ -1,67 +1,48 @@
-////////////////////// definizione delle costanti ////////////////////////
+/*
 
-const countdownEl = document.getElementById("countdown");
-const numbersListEl = document.getElementById("numbers-list");
 
-///// elementi del form
-
-const formEl = document.getElementById("answers-form");
-const formControlEl = document.querySelectorAll("form-control");
-const btnEl = document.querySelector("btn");
-const messageEl = document.getElementById("message");
-
-////////////////////////////////////////////////////////////////////////////
-//                         verifica log
-console.log(countdownEl, numbersListEl, formEl, btnEl, messageEl);
-////////////////////////////////////////////////////////////////////////////
-
-/* 
-- inserimento di numeri in un form
-- verifica delle risposte
+Descrizione: Visualizzare in pagina 5 numeri casuali. Da lì parte un timer di 30 secondi. Dopo 30 secondi i numeri scompaiono e appaiono invece 5 input in cui l'utente deve inserire i numeri che ha visto precedentemente, nell'ordine che preferisce.
+Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
+NOTA: non è importante l'ordine con cui l'utente inserisce i numeri, basta che ne indovini il più possibile.
+BONUS:
+Inseriamo la validazione: se l'utente mette due numeri uguali o inserisce cose diverse da numeri lo blocchiamo in qualche modo.
+Se l’utente ha inserito qualcosa di non valido, segnaliamolo visivamente nel form.
+Consigli del giorno:
+Pensate prima in italiano.
+Dividete in piccoli problemi la consegna.
+Individuate gli elementi di cui avete bisogno per realizzare il programma.
+Immaginate la logica come fosse uno snack: "Dati 2 array di numeri, indica quali e quanti numeri ci sono in comune tra i due array"
 */
 
-// - generare 5 numeri casuali
+//selezione del DOM ( documenti HTML per modificare il contenuto dell'elemento selezionato (number-list linea 29 file index)
+const numberList = document.getElementById("numbers-list");
 
-function numGenerator() {
-  const randomNumber = [];
-  for (let i = 0; i < 5; i++) {
-    const thisNumber = Math.floor(Math.random() * 50) + 1;
-    randomNumber.push(thisNumber);
+//Descrizione: Visualizzare in pagina 5 numeri casuali
+
+//Da lì parte un timer di 30 secondi
+
+//Dopo 30 secondi i numeri scompaiono e appaiono
+
+// invece appaiono 5 input in cui l'utente deve inserire i numeri che ha visto precedentemente, nell'ordine che preferisce
+
+//Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati
+
+/*function generateNumbersList() [funzione per generare una lista di numeri]*/
+let numbers = []; //0
+while (numbers.length < 5) {
+  console.log("hi");
+  const numb = Math.ceil(Math.random() * 10);
+  if (!numbers.includes(numb)) {
+    numbers.push(numb);
   }
-  return randomNumber;
 }
+console.log(numbers);
+numberList.innerHTML = numbers;
 
-const gameNumbers = numGenerator();
-
-console.log(gameNumbers);
-
-// - far comparire una lista di numeri in sequenza e farli scomparire
-
-setTimeout(showNumbers, 3000);
-function showNumbers() {
-  numbersListEl.innerText = gameNumbers;
-}
-
-setTimeout(hideNumbers, 18000);
-function hideNumbers() {
-  numbersListEl.classList.add("d-none");
-  formEl.classList.remove("d-none");
-}
-
-// - inserimento di numeri in un form
-
-formEl.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  function getAnswers() {
-    const answers = [];
-    for (i = 0; i < 5; i++) {
-      thisAnswer = formControlEl[i].value;
-      answers.push(thisAnswer);
-    }
-    return answers;
-  }
-
-  const playerAnswers = getAnswers();
-  console.log(playerAnswers);
-});
+let seconds = 5;
+const limit = 0;
+const timer = setInterval(() => {
+  seconds--;
+  console.log(seconds);
+  console.log(seconds === 0);
+}, 1000);
