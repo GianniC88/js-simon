@@ -16,7 +16,8 @@ Immaginate la logica come fosse uno snack: "Dati 2 array di numeri, indica quali
 
 //selezione del DOM ( documenti HTML per modificare il contenuto dell'elemento selezionato (number-list linea 29 file index)
 const numberList = document.getElementById("numbers-list");
-
+const countdownEl = document.getElementById("countdown");
+const answersFormEl = document.getElementById("answers-form");
 //Descrizione: Visualizzare in pagina 5 numeri casuali
 
 //Da lì parte un timer di 30 secondi
@@ -42,7 +43,17 @@ numberList.innerHTML = numbers;
 let seconds = 5;
 const limit = 0;
 const timer = setInterval(() => {
+  countdownEl.innerText = seconds;
   seconds--;
   console.log(seconds);
   console.log(seconds === 0);
+
+  if (seconds < 0) {
+    // stop countdown
+    clearInterval(timer);
+    // togli la lista di numeri
+    numberList.innerText = "";
+    // forma con answer form ( modulo di rispota)
+    answersFormEl.classList.remove("d-none");
+  }
 }, 1000);
